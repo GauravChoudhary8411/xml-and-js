@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="bank.css" />
+</head>
+
+<body>
+
+    <ol id="bank"></ol>
+    <script>
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                displayData(this.responseXML);
+            }
+        };
+        xhr.open("GET", "bank.xml", true);
+        xhr.send();
+
+        function stringToNode(html) {
+            const template = document.createElement(`template`);
+            html = html.trim();
+            template.innerHTML = html;
+            return template.content.firstChild;
+        }
+
+        function displayData(xmlDoc) {
+            const listElement = document.getElementById("bank");
+            const bankNodes = xmlDoc.getElementsByTagName(`branch`);
+
+            for (let i = 0; i < bankNodes.length; i++) {
+                const bankNode = bankNodes[i];
+                const listItem = stringToNode
+                    (`<ol> <structure>
+                  <p>${`<b1>Branch</b1> 
+                   <b>ID</b>${bankNode.getElementsByTagName(`id`)[0].childNodes[0].nodeValue} 
+                   <b>Name</b>${bankNode.getElementsByTagName(`name`)[0].childNodes[0].nodeValue}
+                   <b>Street</b>${bankNode.getElementsByTagName(`street`)[0].childNodes[0].nodeValue}
+                   <b>City</b>${bankNode.getElementsByTagName(`city`)[0].childNodes[0].nodeValue}
+                   <b>Region</b>${bankNode.getElementsByTagName(`region`)[0].childNodes[0].nodeValue}
+                   <b>Country</b>${bankNode.getElementsByTagName(`country`)[0].childNodes[0].nodeValue} `},</p>
+                   <p>${`<b>Client 1</b>
+                    <b>ID</b>${bankNode.getElementsByTagName(`id`)[0].childNodes[0].nodeValue} 
+                   <b>FirstName</b>${bankNode.getElementsByTagName(`firstName`)[0].childNodes[0].nodeValue}
+                   <b>LastName</b>${bankNode.getElementsByTagName(`lastName`)[0].childNodes[0].nodeValue}
+                   <b>Email</b>${bankNode.getElementsByTagName(`email`)[0].childNodes[0].nodeValue}
+                   <b>PhoneNumber</b>${bankNode.getElementsByTagName(`phoneNumber`)[0].childNodes[0].nodeValue} `}</p>
+                   <p>${`<b>Card 1</b>
+                    <b>Number</b>${bankNode.getElementsByTagName(`number`)[0].childNodes[0].nodeValue} 
+                    <b>Type</b>${bankNode.getElementsByTagName(`type`)[0].childNodes[0].nodeValue}
+                        <b>CVV</b>${bankNode.getElementsByTagName(`cvv`)[0].childNodes[0].nodeValue}
+                        <b>Expires At</b>${bankNode.getElementsByTagName(`expiresAt`)[0].childNodes[0].nodeValue},`}</p>
+                   <p>${`<b>Card 2</b> 
+                    <b>Number</b>${bankNode.getElementsByTagName(`number`)[1].childNodes[0].nodeValue} 
+                    <b>Type</b>${bankNode.getElementsByTagName(`type`)[1].childNodes[0].nodeValue}
+                   <b>CVV</b>${bankNode.getElementsByTagName(`cvv`)[1].childNodes[0].nodeValue}
+                   <b>Expires At</b>${bankNode.getElementsByTagName(`expiresAt`)[1].childNodes[0].nodeValue},`}</p> 
+
+
+                   <p>${`<b>Client 2</b> 
+                    <b>ID</b>${bankNode.getElementsByTagName(`id`)[1].childNodes[0].nodeValue} 
+                    <b>FirstName</b>${bankNode.getElementsByTagName(`firstName`)[1].childNodes[0].nodeValue}
+                   <b>LastName</b>${bankNode.getElementsByTagName(`lastName`)[1].childNodes[0].nodeValue}
+                   <b>Email</b>${bankNode.getElementsByTagName(`email`)[1].childNodes[0].nodeValue}
+                   <b>PhoneNumber</b>${bankNode.getElementsByTagName(`phoneNumber`)[1].childNodes[0].nodeValue} `}</p>
+                   <p>${`<b>Card 1</b>
+                   <b>Number</b>${bankNode.getElementsByTagName(`number`)[0].childNodes[0].nodeValue} 
+                   <b>Type</b>${bankNode.getElementsByTagName(`type`)[0].childNodes[0].nodeValue}
+                    <b>CVV</b>${bankNode.getElementsByTagName(`cvv`)[0].childNodes[0].nodeValue}
+                    <b>Expires At</b>${bankNode.getElementsByTagName(`expiresAt`)[0].childNodes[0].nodeValue},`}</p>
+                   <p>${`<b>Card 2</b> 
+                    <b>Number</b>${bankNode.getElementsByTagName(`number`)[1].childNodes[0].nodeValue} 
+                   <b>Type</b>${bankNode.getElementsByTagName(`type`)[1].childNodes[0].nodeValue}
+                   <b>CVV</b>${bankNode.getElementsByTagName(`cvv`)[1].childNodes[0].nodeValue}
+                   <b>Expires At</b>${bankNode.getElementsByTagName(`expiresAt`)[1].childNodes[0].nodeValue},`}</p> 
+
+                   <p>${`<b>Client 3</b> 
+                    <b>ID</b>${bankNode.getElementsByTagName(`id`)[2].childNodes[0].nodeValue} 
+                    <b>FirstName</b>${bankNode.getElementsByTagName(`firstName`)[2].childNodes[0].nodeValue}
+                    <b>LastName</b>${bankNode.getElementsByTagName(`lastName`)[2].childNodes[0].nodeValue}
+                    <b>Email</b>${bankNode.getElementsByTagName(`email`)[2].childNodes[0].nodeValue}
+                    <b>PhoneNumber</b>${bankNode.getElementsByTagName(`phoneNumber`)[2].childNodes[0].nodeValue} `}</p>
+                   <p>${`<b>Card 1</b>
+                    <b>Number</b>${bankNode.getElementsByTagName(`number`)[0].childNodes[0].nodeValue} 
+                    <b>Type</b> ${bankNode.getElementsByTagName(`type`)[0].childNodes[0].nodeValue}
+                   <b>CVV</b>${bankNode.getElementsByTagName(`cvv`)[0].childNodes[0].nodeValue}
+                   <b>Expires At</b>${bankNode.getElementsByTagName(`expiresAt`)[0].childNodes[0].nodeValue},`}</p>
+                   <p>${`<b>Card 2</b> 
+                    <b>Number</b>${bankNode.getElementsByTagName(`number`)[1].childNodes[0].nodeValue} 
+                    <b>Type</b>${bankNode.getElementsByTagName(`type`)[1].childNodes[0].nodeValue}
+                   <b>CVV</b>${bankNode.getElementsByTagName(`cvv`)[1].childNodes[0].nodeValue}
+                   <b>Expires At</b>${bankNode.getElementsByTagName(`expiresAt`)[1].childNodes[0].nodeValue},`}</p>
+
+                    </structure>
+                `);
+
+                listElement.appendChild(listItem);
+            }
+        }
+    </script>
+</body>
+
+</html>

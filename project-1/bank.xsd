@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="banks" type="banksType"/>
+  <xs:complexType name="cardsType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="number"/>
+      <xs:element type="xs:string" name="type"/>
+      <xs:element type="xs:string" name="cvv"/>
+      <xs:element type="xs:string" name="expiresAt"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="clientsType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="id"/>
+      <xs:element type="xs:string" name="firstName"/>
+      <xs:element type="xs:string" name="lastName"/>
+      <xs:element type="xs:string" name="email"/>
+      <xs:element type="xs:string" name="phoneNumber"/>
+      <xs:element type="cardsType" name="cards" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="branchType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="id"/>
+      <xs:element type="xs:string" name="name"/>
+      <xs:element type="xs:string" name="street"/>
+      <xs:element type="xs:string" name="city"/>
+      <xs:element type="xs:string" name="region"/>
+      <xs:element name="country">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="United States"/>
+            <xs:enumeration value="Canada"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="clientsType" name="clients" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="banksType">
+    <xs:sequence>
+      <xs:element type="branchType" name="branch" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
