@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify API</title>
+    <link rel="stylesheet" type="text/css" href="assignment.css" />
+</head>
+
+<body>
+    <form onsubmit="onSubmit(event)" onreset="onReset()">
+        <label for="input-filter-term">Find genre</label>
+        <input type="text" name="term" id="input-filter-term" placeholder="Enter value" />
+        <button type="submit">Apply filters</button>
+        <button type="reset">Reset filters</button>
+        <div id="radio_buttons">
+            <input type="radio" id="opt_all" name="display" value="Show tracklists" checked>
+            <label for="opt_all">Show tracklists</label>
+            <input type="radio" id="opt_tracklists" name="display" value="Hide tracklists">
+            <label for="opt_tracklists">Hide tracklist</label>
+            <input type="radio" id="opt_genres" name="display" value="Hide playlists">
+            <label for="opt_genres">Hide playlists</label>
+        </div>
+
+    </form>
+    <div id="genres"></div>
+    <script src="assignment.js" type="text/javascript"></script>
+</body>
+
+</html>
